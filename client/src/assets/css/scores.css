@@ -1,0 +1,15 @@
+.scores {
+  height: auto;
+  max-height: 600px;
+}
+.scores td,
+.scores th {
+  white-space: nowrap;
+}
+.scores th:hover {
+  cursor: pointer;
+  background-color: #d9d9d9;
+}
+.scores {
+  transition: max-height ease-in-out 0.5s;
+}

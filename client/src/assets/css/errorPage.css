@@ -1,0 +1,7 @@
+.error a i.fa, .addScore a i.fa {
+  transition: all ease-out 0.3s;
+}
+.error a:hover i.fa, .addScore a:hover i.fa {
+  transform: translateX(-12px);
+  transition: all ease-in 0.3s;
+}
