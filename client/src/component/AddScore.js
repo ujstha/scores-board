@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { Button } from "antd";
 
 export default class AddScore extends Component {
   render() {
-    const { player, score, onSubmit, onChange } = this.props;
+    const { player, score, onSubmit, onChange, btnDisabled } = this.props;
     return (
       <>
         <div className="uk-card uk-card-default uk-width-1-2@l uk-align-center uk-margin-top-2">
@@ -20,6 +21,7 @@ export default class AddScore extends Component {
                   type="text"
                   placeholder="Write player's name here....."
                   onChange={onChange}
+                  required
                 />
               </div>
             </div>
@@ -39,9 +41,18 @@ export default class AddScore extends Component {
                 />
               </div>
             </div>
-            <button className="uk-button uk-button-primary uk-align-right uk-width-1-1">
-              <i className="fa fa-save"></i>&ensp;Save Score
-            </button>
+            <div className="clearfix">
+              <Button
+                className="float-left"
+                type="danger"
+                onClick={() => (window.location.href = "/")}
+              >
+                <i className="fa fa-times"></i>&ensp;Cancel
+              </Button>
+              <Button className="float-right" type="primary" htmlType="submit" disabled={btnDisabled}>
+                <i className="fa fa-save"></i>&ensp;Save Score
+              </Button>
+            </div>
           </form>
         </div>
       </>

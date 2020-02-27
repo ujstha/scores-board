@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { Button } from "antd";
 
 export default class EditScore extends Component {
   render() {
-    const { player, score, onSubmit, onChange } = this.props;
+    const { player, score, onSubmit, onChange, btnDisabled } = this.props;
     return (
       <>
         <div className="uk-card uk-card-default uk-width-1-2@l uk-align-center uk-margin-top-2">
@@ -23,6 +24,7 @@ export default class EditScore extends Component {
                   value={player}
                   placeholder="Write player's name here....."
                   onChange={onChange}
+                  required
                 />
               </div>
             </div>
@@ -40,16 +42,25 @@ export default class EditScore extends Component {
                   min="0"
                   placeholder="Write score here....."
                   onChange={onChange}
+                  required
                 />
               </div>
             </div>
-            <div className="clearfix">
-              <button className="uk-button uk-button-default float-left" style={{width: "48%", whiteSpace: "nowrap"}}>
+            <div className="clearfix" style={{ fontSize: 15 }}>
+              <Button
+                className="float-left"
+                onClick={() => (window.location.href = "/")}
+              >
                 <i className="fa fa-times"></i>&ensp;Cancel
-              </button>
-              <button className="uk-button uk-button-danger float-right" style={{width: "48%", whiteSpace: "nowrap"}}>
+              </Button>
+              <Button
+                className="float-right"
+                type="danger"
+                htmlType="submit"
+                disabled={btnDisabled}
+              >
                 <i className="fa fa-pencil-alt"></i>&ensp;Edit Score
-              </button>
+              </Button>
             </div>
           </form>
         </div>

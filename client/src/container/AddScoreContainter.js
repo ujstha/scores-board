@@ -10,7 +10,7 @@ message.config({
 export default class AddScoreContainer extends Component {
   state = {
     player: "",
-    score: 0,
+    score: null,
     success: false
   };
   onChange = e => {
@@ -33,7 +33,7 @@ export default class AddScoreContainer extends Component {
     });
   };
   render() {
-    const { success } = this.state;
+    const { success, player, score } = this.state;
     return (
       <div className="addScore">
         {success && (
@@ -46,6 +46,9 @@ export default class AddScoreContainer extends Component {
           score="score"
           onSubmit={this.onSubmit}
           onChange={this.onChange}
+          btnDisabled={
+            player === "" || score === null || score < 0 ? true : false
+          }
         />
       </div>
     );

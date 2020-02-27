@@ -8,17 +8,37 @@ export default class ScoresContainer extends Component {
     total: "",
     limit: 5,
     sortedScore: false,
-    sortBy: ""
+    sortBy: "date"
   };
   componentDidMount() {
-    fetch(`/`).then(res =>
+    fetch(`/`).then(res => {
+      if (this.state.sortBy === "score") {
+        this.setState({
+          scoreBoard: res.data
+            .sort((a, b) => b.score - a.score)
+            .slice(0, this.state.limit)
+        });
+      } else if (this.state.sortBy === "player") {
+        this.setState({
+          scoreBoard: res.data
+            .sort((a, b) =>
+              a.player.toUpperCase() > b.player.toUpperCase() ? 1 : -1
+            )
+            .slice(0, this.state.limit)
+        });
+      } else {
+        this.setState({
+          scoreBoard: res.data
+            .sort(
+              (a, b) => Date.parse(a.updatedDate) - Date.parse(b.updatedDate)
+            )
+            .slice(0, this.state.limit)
+        });
+      }
       this.setState({
-        scoreBoard: res.data
-          .sort((a, b) => a.score - b.score)
-          .slice(0, this.state.limit),
         total: res.data.length
-      })
-    );
+      });
+    });
   }
   onChange = e => {
     this.setState({
@@ -40,8 +60,10 @@ export default class ScoresContainer extends Component {
       )
     });
   };
-  clearSort = () => {
-    this.setState({ sortBy: "" });
+  sortDate = () => {
+    this.setState({
+      sortBy: "date"
+    });
     this.componentDidMount();
   };
   render() {
@@ -52,9 +74,9 @@ export default class ScoresContainer extends Component {
         total={total}
         onChange={this.onChange}
         limit={limit}
-        sortScore={sortBy !== "score" && this.sortScore}
+        sortScore={this.sortScore}
         sortPlayer={this.sortPlayer}
-        clearSort={this.clearSort}
+        sortDate={this.sortDate}
         sortBy={sortBy}
       />
     );

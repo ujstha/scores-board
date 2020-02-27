@@ -11,7 +11,7 @@ export default class Scores extends Component {
       limit,
       total,
       sortScore,
-      clearSort,
+      sortDate,
       sortPlayer,
       sortBy
     } = this.props;
@@ -27,17 +27,27 @@ export default class Scores extends Component {
               className="uk-button uk-button-small uk-button-primary float-right"
               onClick={() => (window.location.href = "/add-score")}
             >
-              Add Scores
+              <i className="fa fa-plus"></i>
             </button>
           </div>
           <div className="uk-card-title">
+            <small style={{ fontSize: 15 }}>Sort by: &nbsp;</small>
+            <button
+              onClick={sortDate}
+              className={`uk-button uk-button-small uk-text-capitalize ${
+                sortBy === "date" ? "uk-button-secondary" : "uk-button-default"
+              }`}
+            >
+              Date
+            </button>
+            &nbsp;
             <button
               onClick={sortScore}
               className={`uk-button uk-button-small uk-text-capitalize ${
                 sortBy === "score" ? "uk-button-secondary" : "uk-button-default"
               }`}
             >
-              Sort Score
+              Score
             </button>
             &nbsp;
             <button
@@ -48,14 +58,7 @@ export default class Scores extends Component {
                   : "uk-button-default"
               }`}
             >
-              Sort Player
-            </button>
-            &nbsp;
-            <button
-              onClick={clearSort}
-              className="uk-button uk-button-default uk-button-small uk-text-capitalize"
-            >
-              Clear sorters
+              Player
             </button>
           </div>
           <table className="table table-responsive-lg uk-table-striped uk-table-divider mt-2">

@@ -10,7 +10,7 @@ message.config({
 export default class EditScoreContainer extends Component {
   state = {
     player: "",
-    score: 0
+    score: null
   };
   componentDidMount() {
     fetch(`/${this.props.match.params.id}`).then(res => {
@@ -18,7 +18,6 @@ export default class EditScoreContainer extends Component {
         player: res.data.player,
         score: res.data.score
       });
-      console.log(res);
     });
   }
   onChange = e => {
@@ -49,6 +48,9 @@ export default class EditScoreContainer extends Component {
           score={score}
           onSubmit={this.onSubmit}
           onChange={this.onChange}
+          btnDisabled={
+            player === "" || score === null || score < 0 ? true : false
+          }
         />
       </div>
     );
